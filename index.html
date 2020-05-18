@@ -15,16 +15,16 @@
     <body>
         <h3>Track the status of Covid-19 based on location</h3>
         <form action="">
-            <label for="location-search">Please enter a Country:</label>
-            <input type="search" id="location-search" placeholder="">
-            <select name="" id="">
+            <label for="locationSelect">Please choose a Country:</label>
+            <select name="locationSelect" id="locationSelect" required class="locationSelect">
+                <option value="default" selected="selected" disabled>Country</option>
                 <!-- country names will be added dynamically here -->
             </select>
 
-            <label for="date-search">Please select a date:</label>
-            <input type="date" id="date-search">
+            <!-- <label for="dateSearch">Please select a date:</label>
+            <input type="date" id="dateSearch" required> -->
 
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" id="submitButton">
             
         </form>
     </body>
