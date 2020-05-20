@@ -2,19 +2,25 @@ window.onload = function () {
     getData();
 };
 
-/* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
-const getData = async () => {
-    const response = await fetch("https://api.covid19api.com/summary");
-    const myJson = await response.json(); //extract JSON from the http response
-    // do something with myJson
-    const newcountryList = myJson.Countries;
 
-    newcountryList.forEach((country) => {
+const getData = async () => {
+    const response = await fetch("https://coronavirus-19-api.herokuapp.com/countries");
+    const dataInJson = await response.json(); 
+
+    const newCountryList = [];
+    dataInJson.forEach((country) => {
+        const countryName = country.country;
+        newCountryList.push(countryName);
+    });
+
+    newCountryList.sort();
+    newCountryList.forEach((country) => {
         const node = document.createElement("option");
-        const textnode = document.createTextNode(country.Country);
+        const textnode = document.createTextNode(country);
         node.appendChild(textnode);
         document.getElementById("locationSelect").appendChild(node);
     });
+
 }
 
 let today = new Date();
@@ -38,51 +44,46 @@ document.getElementById("submitButton").onclick = async function (event) {
     
     else {
 
-        const response = await fetch(`https://api.covid19api.com/summary`);
-        const jsonData = await response.json(); //extract JSON from the http response
+        const response = await fetch(`https://coronavirus-19-api.herokuapp.com/countries/${selectedCountry}`);
+        const jsonData = await response.json();
+        
+
     
-        const allData = jsonData.Countries;
-    
-        const countryData = allData.filter((country) => {
-            
-            return country.Country === selectedCountry;
-        })
-    
-        const countryObject = countryData[0];
-    
+        
         const resultsHeaderNode = document.createElement("h3");
         const resultsHeaderText = document.createTextNode(`Covid status as of ${today} in ${selectedCountry}`);
         resultsHeaderNode.appendChild(resultsHeaderText);
         document.getElementById("results").appendChild(resultsHeaderNode);
     
         const newConfirmedNode = document.createElement("p");
-        const newConfirmedtext = document.createTextNode(`New confirmed cases: ${countryObject.NewConfirmed}`);
+        const newConfirmedtext = document.createTextNode(`New confirmed cases: ${jsonData.todayCases}`);
         newConfirmedNode.appendChild(newConfirmedtext);
         document.getElementById("results").appendChild(newConfirmedNode);
     
         const newDeathsNode = document.createElement("p");
-        const newDeathsText = document.createTextNode(`New deaths: ${countryObject.NewDeaths}`);
+        const newDeathsText = document.createTextNode(`New deaths: ${jsonData.todayDeaths}`);
         newDeathsNode.appendChild(newDeathsText);
         document.getElementById("results").appendChild(newDeathsNode);
     
-        const newRecoveredNode = document.createElement("p");
-        const newRecoveredText = document.createTextNode(`New recovered: ${countryObject.NewRecovered}`);
-        newRecoveredNode.appendChild(newRecoveredText);
-        document.getElementById("results").appendChild(newRecoveredNode);
-    
+        
         const totalConfirmedNode = document.createElement("p");
-        const totalConfirmedText = document.createTextNode(`Total confirmed cases: ${countryObject.TotalConfirmed}`);
+        const totalConfirmedText = document.createTextNode(`Total confirmed cases: ${jsonData.cases}`);
         totalConfirmedNode.appendChild(totalConfirmedText);
         document.getElementById("results").appendChild(totalConfirmedNode);
-    
-        const totalDeathsNode = document.createElement("p");
-        const totalDeathsText = document.createTextNode(`Total deaths: ${countryObject.TotalDeaths}`);
-        totalDeathsNode.appendChild(totalDeathsText);
-        document.getElementById("results").appendChild(totalDeathsNode);
-    
+        
+        const totalActiveNode = document.createElement("p");
+        const totalActiveText = document.createTextNode(`Total active cases: ${jsonData.active}`);
+        totalActiveNode.appendChild(totalActiveText);
+        document.getElementById("results").appendChild(totalActiveNode);
+        
         const totalRecoveredNode = document.createElement("p");
-        const totalRecoveredText = document.createTextNode(`Total recovered: ${countryObject.TotalRecovered}`);
+        const totalRecoveredText = document.createTextNode(`Total recovered: ${jsonData.recovered}`);
         totalRecoveredNode.appendChild(totalRecoveredText);
         document.getElementById("results").appendChild(totalRecoveredNode);
+
+        const totalDeathsNode = document.createElement("p");
+        const totalDeathsText = document.createTextNode(`Total deaths: ${jsonData.deaths}`);
+        totalDeathsNode.appendChild(totalDeathsText);
+        document.getElementById("results").appendChild(totalDeathsNode);
     }
 };
