@@ -17,6 +17,13 @@ const getData = async () => {
     });
 }
 
+let today = new Date();
+const dd = String(today.getDate()).padStart(2, '0');
+const mm = String(today.getMonth() + 1).padStart(2, '0');
+const yyyy = today.getFullYear();
+
+today = dd + '/' + mm + '/' + yyyy;
+
 document.getElementById("submitButton").onclick = async function (event) {
     event.preventDefault();
 
@@ -44,7 +51,7 @@ document.getElementById("submitButton").onclick = async function (event) {
         const countryObject = countryData[0];
     
         const resultsHeaderNode = document.createElement("h3");
-        const resultsHeaderText = document.createTextNode(`Covid status as of ${countryObject.Date} in ${selectedCountry}`);
+        const resultsHeaderText = document.createTextNode(`Covid status as of ${today} in ${selectedCountry}`);
         resultsHeaderNode.appendChild(resultsHeaderText);
         document.getElementById("results").appendChild(resultsHeaderNode);
     
