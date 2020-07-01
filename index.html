@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +9,12 @@
 
     <title>Covid Tracker</title>
 </head>
-<body>
+
+<body class="wrapper">
     <header>
         <h1>Covid Tracker</h1>
     </header>
+
     <body>
         <h3>Track the status of Covid-19 based on location</h3>
         <form action="">
@@ -25,11 +28,44 @@
             <input type="date" id="dateSearch" required> -->
 
             <input type="submit" value="Submit" id="submitButton">
-            
+
         </form>
+        <fieldset>
+            <legend align="center">Filter through the results</legend>
+
+            <div class="buttonsDiv">
+                <label for="newConfirmed">New Confirmed</label>
+                <input type="checkbox" name="filterResults" value="newConfirmedChoose" checked="true" id="newConfirmed">
+            </div>
+
+            <div class="buttonsDiv">
+                <label for="newDeaths">New Deaths</label>
+                <input type="checkbox" name="filterResults" value="newDeathsChoose" checked="true" id="newDeaths">
+            </div>
+
+            <div class="buttonsDiv">
+                <label for="totalConfirmed">Total Confirmed</label>
+                <input type="checkbox" name="filterResults" value="totalConfirmedChoose" checked="true" id="totalConfirmed">
+            </div>
+
+            <div class="buttonsDiv">
+                <label for="totalActive">Total Active</label>
+                <input type="checkbox" name="filterResults" value="totalActiveChoose" checked="true" id="totalActive">
+            </div>
+
+            <div class="buttonsDiv">
+                <label for="totalRecovered">Total Recovered</label>
+                <input type="checkbox" name="filterResults" value="totalRecoveredChoose" checked="true" id="totalRecovered">
+            </div>
+
+            <div class="buttonsDiv">
+                <label for="totalDeaths">Total Deaths</label>
+                <input type="checkbox" name="filterResults" value="totalDeathsChoose" checked="true" id="totalDeaths">
+            </div>
+        </fieldset>
 
         <div class="results" id="results">
-            
+
         </div>
     </body>
 
@@ -37,4 +73,5 @@
 
     <script src="./scripts/scripts.js"></script>
 </body>
+
 </html>

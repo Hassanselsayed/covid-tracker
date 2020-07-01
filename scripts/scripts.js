@@ -56,34 +56,53 @@ document.getElementById("submitButton").onclick = async function (event) {
         document.getElementById("results").appendChild(resultsHeaderNode);
     
         const newConfirmedNode = document.createElement("p");
+        newConfirmedNode.setAttribute("id", "newConfirmedChoose");
         const newConfirmedtext = document.createTextNode(`New confirmed cases: ${jsonData.todayCases}`);
         newConfirmedNode.appendChild(newConfirmedtext);
         document.getElementById("results").appendChild(newConfirmedNode);
     
         const newDeathsNode = document.createElement("p");
+        newDeathsNode.setAttribute("id", "newDeathsChoose");
         const newDeathsText = document.createTextNode(`New deaths: ${jsonData.todayDeaths}`);
         newDeathsNode.appendChild(newDeathsText);
         document.getElementById("results").appendChild(newDeathsNode);
     
         
         const totalConfirmedNode = document.createElement("p");
+        totalConfirmedNode.setAttribute("id", "totalConfirmedChoose");
         const totalConfirmedText = document.createTextNode(`Total confirmed cases: ${jsonData.cases}`);
         totalConfirmedNode.appendChild(totalConfirmedText);
         document.getElementById("results").appendChild(totalConfirmedNode);
         
         const totalActiveNode = document.createElement("p");
+        totalActiveNode.setAttribute("id", "totalActiveChoose");
         const totalActiveText = document.createTextNode(`Total active cases: ${jsonData.active}`);
         totalActiveNode.appendChild(totalActiveText);
         document.getElementById("results").appendChild(totalActiveNode);
         
         const totalRecoveredNode = document.createElement("p");
+        totalRecoveredNode.setAttribute("id", "totalRecoveredChoose");
         const totalRecoveredText = document.createTextNode(`Total recovered: ${jsonData.recovered}`);
         totalRecoveredNode.appendChild(totalRecoveredText);
         document.getElementById("results").appendChild(totalRecoveredNode);
 
         const totalDeathsNode = document.createElement("p");
+        totalDeathsNode.setAttribute("id", "totalDeathsChoose");
         const totalDeathsText = document.createTextNode(`Total deaths: ${jsonData.deaths}`);
         totalDeathsNode.appendChild(totalDeathsText);
         document.getElementById("results").appendChild(totalDeathsNode);
     }
 };
+
+// assign function to onclick property of checkbox
+document.querySelectorAll("input[type=checkbox]").forEach(button => {
+    button.onclick = function () {
+        const buttonValue = this.value;
+        const text = document.getElementById(buttonValue);
+        if (this.checked) {
+            text.style.display = "block";
+        } else {
+            text.style.display = "none";
+        }
+    };
+})
