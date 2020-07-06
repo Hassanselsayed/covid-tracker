@@ -16,12 +16,18 @@ html {
     width: 90%;
     margin: 0 auto;
     text-align: center;
-    background-color: #686963;
-    /* color: #3D5467; */
+    background-color: #B2B2AE;
 }
+main {
+    height: 80vh;
+}
+
+p {
+    margin: 0;
+}
+
 form {
-    margin-bottom: 20px;
-    /* display: flex; */
+    padding-bottom: 20px;
 }
 .locationSelect {
     width: 200px;
@@ -30,8 +36,21 @@ form {
 }
 input[type=submit],
 .locationSelect {
+    border: 1px solid transparent;
+}
+input[type=submit]:hover,
+.locationSelect:hover,
+input[type=submit]:focus,
+.locationSelect:focus {
+    border: 1px solid black;
+}
+input[type=submit] {
+    cursor: pointer;
     background-color: #8AA29E;
-    border: none;
+}
+input[type=submit]:hover,
+input[type=submit]:focus {
+    background-color: #42e2c7;
 }
 
 fieldset {
@@ -40,9 +59,16 @@ fieldset {
     flex-wrap: wrap;
     width: 100%;
 }
-.buttonsDiv {
+.checkbox {
     margin: 0 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.checkbox input[type=checkbox]:focus {
+    outline: 1px dotted black;
+}
+
+footer {
+    height: 5vh;
 }
